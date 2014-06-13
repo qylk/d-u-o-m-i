@@ -64,6 +64,8 @@ public class ArtistInfoFragment extends Fragment implements OnClickListener {
 		getParentFragment()
 				.getFragmentManager()
 				.beginTransaction()
+				.setCustomAnimations(R.anim.in_from_left, 0, 0,
+						R.anim.out_to_left)
 				.add(android.R.id.content, frg,
 						SimpleTrackListFragment.class.getSimpleName())
 				.addToBackStack(SimpleTrackListFragment.class.getSimpleName())
