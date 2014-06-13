@@ -62,13 +62,6 @@ public abstract class CommonTrackListFragment extends ActionBarFragment
 
 	protected abstract ListAdapter onCreateListAdapter(Bundle savedInstanceState);
 
-	@Override
-	public void onDestroy() {
-		listview.setAdapter(null);
-		mAdapter = null;
-		super.onDestroy();
-	}
-
 	protected int getItemLayout() {
 		return R.layout.track_list_item;
 	}

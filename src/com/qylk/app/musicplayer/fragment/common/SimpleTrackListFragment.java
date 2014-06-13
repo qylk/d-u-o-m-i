@@ -6,13 +6,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CursorAdapter;
@@ -22,33 +21,21 @@ import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.adapter.TrackListAdapter;
 import com.qylk.app.musicplayer.service.MediaPlaybackService;
 import com.qylk.app.musicplayer.service.TrackIdProvider;
+import com.qylk.app.musicplayer.utils.MEDIA.AUDIO;
 import com.qylk.app.musicplayer.utils.MediaDatabase;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
 
 public class SimpleTrackListFragment extends CommonTrackListFragment implements
-		OnItemClickListener {
+		OnItemClickListener,
+		android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	// Fragment life cycle is:
 	// onAttach()->onCreate()->onCreateView()->onActivityCreated()->onStart()->onResume()->
 	// Fragment Active->onPause()->onStop()->onDestroyView()->onDetach()
 
 	private View headerview;
-
 	private boolean headerVisible = true;
-	public static final int TYPE_LIBRARY = 0;
-	public static final int TYPE_SEARCH = 1;
-	public static final int TYPE_PLAYING = 2;
-	public static final int TYPE_STATIC_PLAYLIST = 3;
-	private int mType = TYPE_LIBRARY;
-	private Handler mHandler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-			ListAdapter adapter = getAdapter();
-			if (adapter instanceof CursorAdapter) {
-				((CursorAdapter) adapter).changeCursor(onCreateCursor());
-			}
-		}
-	};
+	public static final String[] cols = { AUDIO.FIELD_ID, AUDIO.FIELD_TITLE,
+			AUDIO.FIELD_ARTIST, AUDIO.FIELD_TITLE_KEY };
 
 	public boolean isHeaderViewVisible() {
 		return headerVisible;
@@ -56,21 +43,11 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 
 	public void setHeaderVisible(boolean visible) {
 		this.headerVisible = visible;
-		if (headerview != null)
-			updateHeaderView();
 	}
 
 	@Override
 	protected int getLayout() {
 		return R.layout.listview_expandable;
-	}
-
-	public void setListType(int type) {
-		this.mType = type;
-	}
-
-	public int getListType() {
-		return this.mType;
 	}
 
 	@Override
@@ -81,13 +58,12 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		ListAdapter adapter = getAdapter();
-		if (adapter instanceof CursorAdapter) {
-			((CursorAdapter) adapter).changeCursor(onCreateCursor());
-		}
 		mPlayingPositionListener.onReceive(null, null);// 更新
 		getListView().setOnItemClickListener(this);
-
+		getLoaderManager().initLoader(0, getArguments(), this);
+		if (getArguments() != null && getArguments().containsKey("title")) {
+			setTitle(getArguments().getString("title"));
+		}
 	}
 
 	@Override
@@ -95,9 +71,13 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 			ViewGroup container, Bundle savedInstanceState) {
 		headerview = getHeaderView(inflater);
 		container.addView(headerview);
+		headerview.setVisibility(View.GONE);
 		super.onCreateContentView(inflater, container, savedInstanceState);
 	}
 
+	/**
+	 * 根据数量，决定是否显示随机播放按钮
+	 */
 	public void updateHeaderView() {
 		if (!headerVisible || getAdapter().getCount() < 2) {
 			headerview.setVisibility(View.GONE);
@@ -161,24 +141,10 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 				new String[] {}, new int[] {});
 	}
 
-	protected Cursor onCreateCursor() {
-		return MediaDatabase.getLibrary(getActivity());
-	}
-
 	@Override
 	public void onPause() {
 		getActivity().unregisterReceiver(mPlayingPositionListener);
 		super.onPause();
-	}
-
-	@Override
-	public void onDestroy() {
-		Adapter adapter = getAdapter();
-		if (adapter != null) {
-			if (adapter instanceof CursorAdapter)
-				((CursorAdapter) adapter).getCursor().close();
-		}
-		super.onDestroy();
 	}
 
 	@Override
@@ -188,5 +154,24 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 		getActivity().registerReceiver(mPlayingPositionListener, f);
 		mPlayingPositionListener.onReceive(getActivity(), null);
 		super.onResume();
+	}
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		return new CursorLoader(getActivity(), AUDIO.URI, MediaDatabase.cols,
+				arg1 == null ? null : arg1.getString("selection"), null, null);
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> arg0, Cursor newCursor) {
+		// Swap the new cursor in. (The framework will take care of closing the
+		// old cursor once we return.)
+		((CursorAdapter) getAdapter()).swapCursor(newCursor);
+		updateHeaderView();
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> arg0) {
+		((CursorAdapter) getAdapter()).swapCursor(null);
 	}
 }

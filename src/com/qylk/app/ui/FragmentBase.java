@@ -9,8 +9,7 @@ public class FragmentBase extends Fragment {
 		return false;
 	};
 
-	public boolean onBackPressed() {
-		return getFragmentManager().popBackStackImmediate();
+	public void onBackPressed() {
+		getFragmentManager().popBackStack();
 	};
-
 }

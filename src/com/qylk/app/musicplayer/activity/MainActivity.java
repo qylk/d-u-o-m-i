@@ -12,6 +12,8 @@ import com.qylk.app.musicplayer.fragment.MiniPlayerBarFragment;
 import com.qylk.app.musicplayer.fragment.PlayerFragment2;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
 import com.qylk.app.musicplayer.utils.ServiceProxy.ServiceProxyRegisterListener;
+import com.qylk.app.ui.ActionBarFragment;
+import com.qylk.app.ui.FocusableFragment;
 import com.qylk.app.ui.FragmentBase;
 
 public class MainActivity extends BaseActivity implements
@@ -37,6 +39,7 @@ public class MainActivity extends BaseActivity implements
 		ft.replace(R.id.minibar, mPlayerBarFragment, "playerbar");
 		ft.add(android.R.id.content, player, "player");
 		ft.hide(player);
+		((FocusableFragment) mListGenreFragment).requestFragemntFocus();
 		ft.commit();
 	}
 
@@ -48,31 +51,17 @@ public class MainActivity extends BaseActivity implements
 
 	@Override
 	public void onBackPressed() {
-		FragmentManager fm = getSupportFragmentManager();
-		Fragment player = fm.findFragmentByTag("player");
-		if (!player.isHidden()) {
-			((FragmentBase) player).onBackPressed();
-			return;
-		}
-		int count = fm.getBackStackEntryCount();
-		if (count != 0) {
-			FragmentBase fb = (FragmentBase) fm.findFragmentByTag(fm
-					.getBackStackEntryAt(count - 1).getName());
-			if (fb != null)
-				fb.onBackPressed();
-		} else
-			toggle();
+		Fragment frg = ActionBarFragment.getFoucusFragment();
+		((FragmentBase) frg).onBackPressed();
 	}
 
+	// dispatch KeyEvent to fragments
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		Fragment player = getSupportFragmentManager().findFragmentByTag(
-				"player");
-		if (!player.isHidden()) {
-			boolean val = ((FragmentBase) player).onKeyDown(keyCode, event);
-			if (val == true)
-				return true;
-		}
+		Fragment frg = ActionBarFragment.getFoucusFragment();
+		boolean val = ((FragmentBase) frg).onKeyDown(keyCode, event);
+		if (val == true)
+			return true;
 		return super.onKeyDown(keyCode, event);
 	}
 

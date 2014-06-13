@@ -2,7 +2,6 @@ package com.qylk.app.musicplayer.fragment;
 
 import java.lang.reflect.Field;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,15 +25,11 @@ public class QueueFragment extends SimpleSortableTrackListFragment {
 			// 使用代码修改原ActionBar不易，直接利用反射替换为兼容的ActionBar视图
 			Field field = ActionBarFragment.class.getDeclaredField("mFrameRes");
 			field.setAccessible(true);
-			field.set(this, Integer.valueOf(R.layout.actionbar_content_frame_player));
+			field.set(this,
+					Integer.valueOf(R.layout.actionbar_content_frame_player));
 		} catch (Exception e) {
 		}
 		super.onCreate(savedInstanceState);
-	}
-
-	@Override
-	protected Cursor onCreateCursor() {
-		return new NowPlayingCursor(getActivity());
 	}
 
 	@Override
@@ -56,7 +51,6 @@ public class QueueFragment extends SimpleSortableTrackListFragment {
 		container.addView(header);
 		super.onCreateContentView(inflater, container, savedInstanceState);
 		setHeaderVisible(false);
-		// getActionbar().setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -70,6 +64,7 @@ public class QueueFragment extends SimpleSortableTrackListFragment {
 		getListView().requestFocus();
 	}
 
+	// TODO CURSOR生成
 	@Override
 	protected void onCreateActionBar(ActionBar act) {
 		super.onCreateActionBar(act);

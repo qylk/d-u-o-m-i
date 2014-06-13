@@ -89,10 +89,8 @@ public class MediaDatabase {
 	public static Cursor getSearchCursor(Context context, String selection) {
 		if (selection == null)
 			return null;
-		return context.getContentResolver().query(
-				AUDIO.URI,
-				new String[] { AUDIO.FIELD_ID, AUDIO.FIELD_TITLE,
-						AUDIO.FIELD_ARTIST }, selection, null, null);
+		return context.getContentResolver().query(AUDIO.URI, cols, selection,
+				null, null);
 	}
 
 	public static void updatePlayTimes(Context context, int id) {

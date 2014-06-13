@@ -1,4 +1,4 @@
-package com.qylk.app.musicplayer.fragment;
+package com.qylk.app.musicplayer.service;
 
 import java.util.Arrays;
 
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.AbstractCursor;
 import android.database.Cursor;
 
-import com.qylk.app.musicplayer.service.TrackIdProvider;
 import com.qylk.app.musicplayer.utils.MEDIA.AUDIO;
 import com.qylk.app.musicplayer.utils.MediaDatabase;
 import com.qylk.app.musicplayer.utils.MyInteger;

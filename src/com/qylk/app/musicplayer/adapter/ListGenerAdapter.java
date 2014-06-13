@@ -1,4 +1,4 @@
-package com.qylk.app.ui.player.widget;
+package com.qylk.app.musicplayer.adapter;
 
 import android.content.Context;
 import android.graphics.Color;

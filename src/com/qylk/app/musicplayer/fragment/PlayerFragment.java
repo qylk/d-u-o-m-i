@@ -61,7 +61,7 @@ public class PlayerFragment extends ActionBarFragment {
 		this.content = (MyPager) v.findViewById(R.id.content_player);
 		this.playerBar = (PlayerBar) v.findViewById(R.id.playerbar);
 		queueWapper = (ViewStub) findViewById(R.id.queue);
-		mPagerAdapter = new ViewPagerAdapter(getFragmentManager(),
+		mPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(),
 				getActivity());
 		mPagerAdapter.addFragment("info", ArtistInfoFragment.class, null);
 		mPagerAdapter.addFragment("art", ArtistArtFragment.class, null);
@@ -145,12 +145,10 @@ public class PlayerFragment extends ActionBarFragment {
 	};
 
 	@Override
-	public boolean onBackPressed() {
+	public void onBackPressed() {
 		if (queue != null && queue.getVisibility() == View.VISIBLE) {
 			toggleQueue();
-			return true;
 		}
-		return super.onBackPressed();
 	}
 
 	private void setTitle(String title, String subtitle) {

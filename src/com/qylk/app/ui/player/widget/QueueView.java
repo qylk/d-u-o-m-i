@@ -14,8 +14,8 @@ import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.adapter.TrackListAdapter;
-import com.qylk.app.musicplayer.fragment.NowPlayingCursor;
 import com.qylk.app.musicplayer.service.MediaPlaybackService;
+import com.qylk.app.musicplayer.service.NowPlayingCursor;
 import com.qylk.app.musicplayer.service.TrackIdProvider;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
 

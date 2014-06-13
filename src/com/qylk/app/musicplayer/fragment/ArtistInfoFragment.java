@@ -1,9 +1,5 @@
 package com.qylk.app.musicplayer.fragment;
 
-import com.qylk.app.musicplayer.R;
-import com.qylk.app.musicplayer.service.MediaPlaybackService;
-import com.qylk.app.musicplayer.utils.ServiceProxy;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +8,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.qylk.app.musicplayer.R;
+import com.qylk.app.musicplayer.fragment.common.SimpleTrackListFragment;
+import com.qylk.app.musicplayer.service.MediaPlaybackService;
+import com.qylk.app.musicplayer.utils.ServiceProxy;
+import com.qylk.app.ui.FocusableFragment;
 
 public class ArtistInfoFragment extends Fragment implements OnClickListener {
 	private TextView artist;
@@ -43,10 +45,30 @@ public class ArtistInfoFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.artsit) {
-			// TODO
-		} else {
-			// TODO
+			query(true, artist.getText());
+		} else if (v.getId() == R.id.album) {
+			query(false, album.getText());
 		}
+	}
+
+	private void query(boolean artist, CharSequence tip) {
+		Bundle argument = new Bundle();
+		if (artist)
+			argument.putString("selection", "artist like '%" + tip + "%'");
+		else
+			argument.putString("selection", "album like '%" + tip + "%'");
+		argument.putString("title", tip.toString());
+		Fragment frg = Fragment.instantiate(getActivity(),
+				SimpleTrackListFragment.class.getName(), argument);
+		// android.R.id.content为根View，不再此Fragmnet视图内，必须使用getParentFragment().getFragmentManager()操作
+		getParentFragment()
+				.getFragmentManager()
+				.beginTransaction()
+				.add(android.R.id.content, frg,
+						SimpleTrackListFragment.class.getSimpleName())
+				.addToBackStack(SimpleTrackListFragment.class.getSimpleName())
+				.commit();
+		((FocusableFragment) frg).requestFragemntFocus();
 	}
 
 	private BroadcastReceiver mTrackListListener = new BroadcastReceiver() {

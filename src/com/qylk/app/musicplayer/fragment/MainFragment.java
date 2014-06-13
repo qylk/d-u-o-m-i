@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.activity.MainActivity;
+import com.qylk.app.musicplayer.adapter.ListGenerAdapter;
 import com.qylk.app.ui.ActionBar;
 import com.qylk.app.ui.ActionBarFragment;
 import com.qylk.app.ui.menu.ActionBarMenuItem;
-import com.qylk.app.ui.player.widget.ListGenerAdapter;
 
 public class MainFragment extends ActionBarFragment implements
 		OnItemClickListener {
@@ -39,7 +39,9 @@ public class MainFragment extends ActionBarFragment implements
 
 			@Override
 			public void onClick(View v) {
-				addFragment(SearchFragment.class);
+				Bundle argument = new Bundle();
+				argument.putString("title", "ËÑË÷");
+				addFragment(SearchFragment.class, argument);
 			}
 		});
 		ll.addView(searchView);
@@ -60,7 +62,8 @@ public class MainFragment extends ActionBarFragment implements
 	}
 
 	private View getHeaderView(String header, LayoutInflater inflater) {
-		View headerview = inflater.inflate(R.layout.cell_list_genre_header, null);
+		View headerview = inflater.inflate(R.layout.cell_list_genre_header,
+				null);
 		((TextView) headerview.findViewById(R.id.title)).setText(header);
 		return headerview;
 	}
@@ -80,6 +83,11 @@ public class MainFragment extends ActionBarFragment implements
 				.getDrawable(R.drawable.btn_search), 3));
 	}
 
+	@Override
+	public void onBackPressed() {
+		((MainActivity) getActivity()).toggle();
+	}
+
 	private OnClickListener homeClickListener = new OnClickListener() {
 
 		@Override
@@ -88,8 +96,6 @@ public class MainFragment extends ActionBarFragment implements
 			a.toggle();
 		}
 	};
-	
-	
 
 	@Override
 	protected void onActionMenuSelected(ActionBarMenuItem item) {
@@ -105,9 +111,12 @@ public class MainFragment extends ActionBarFragment implements
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		Class<?> fragment = null;
+		Bundle argument = new Bundle();
 		switch (position) {
 		case 0:
 			fragment = LibraryListFragment.class;
+			argument.putString("selection", "_id >0 ORDER BY title_key ASC");
+			argument.putString("title", "¸èÇú¿â");
 			break;
 		case 1:
 			break;
@@ -127,6 +136,6 @@ public class MainFragment extends ActionBarFragment implements
 		default:
 			break;
 		}
-		addFragment(fragment);
+		addFragment(fragment, argument);
 	}
 }

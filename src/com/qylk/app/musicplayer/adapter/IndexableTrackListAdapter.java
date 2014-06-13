@@ -76,7 +76,15 @@ public class IndexableTrackListAdapter extends TrackListAdapter implements
 
 	@Override
 	public void changeCursor(Cursor cursor) {
+		if (cursor != null)
 		chars = collectRawChars(cursor);
 		super.changeCursor(cursor);
+	}
+
+	@Override
+	public Cursor swapCursor(Cursor cursor) {
+		if (cursor != null)
+			chars = collectRawChars(cursor);
+		return super.swapCursor(cursor);
 	}
 }

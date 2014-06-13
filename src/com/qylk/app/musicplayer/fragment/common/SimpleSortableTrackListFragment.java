@@ -2,13 +2,13 @@ package com.qylk.app.musicplayer.fragment.common;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
 import com.qylk.app.musicplayer.R;
-import com.qylk.app.musicplayer.fragment.NowPlayingCursor;
 
 public class SimpleSortableTrackListFragment extends SimpleTrackListFragment {
 	private DragSortListView listview;
@@ -32,8 +32,8 @@ public class SimpleSortableTrackListFragment extends SimpleTrackListFragment {
 	}
 
 	@Override
-	protected Cursor onCreateCursor() {
-		return new NowPlayingCursor(getActivity());
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		return null;
 	}
 
 	@Override
@@ -46,18 +46,18 @@ public class SimpleSortableTrackListFragment extends SimpleTrackListFragment {
 		listview.setOnTouchListener(mController);
 	}
 
-//	@Override
-//	public void onCreate(Bundle savedInstanceState) {
-//		try {
-//			// 使用代码修改原ActionBar不易，直接利用反射替换为兼容的ActionBar视图
-//			Field field = ActionBarFragment.class.getDeclaredField(
-//					"mFrameRes");
-//			field.setAccessible(true);
-//			field.set(this, Integer.valueOf(R.layout.contentplayingframe));
-//		} catch (Exception e) {
-//		}
-//		super.onCreate(savedInstanceState);
-//	}
+	// @Override
+	// public void onCreate(Bundle savedInstanceState) {
+	// try {
+	// // 使用代码修改原ActionBar不易，直接利用反射替换为兼容的ActionBar视图
+	// Field field = ActionBarFragment.class.getDeclaredField(
+	// "mFrameRes");
+	// field.setAccessible(true);
+	// field.set(this, Integer.valueOf(R.layout.contentplayingframe));
+	// } catch (Exception e) {
+	// }
+	// super.onCreate(savedInstanceState);
+	// }
 
 	// @Override
 	// public void onActivityCreated(Bundle savedInstanceState) {

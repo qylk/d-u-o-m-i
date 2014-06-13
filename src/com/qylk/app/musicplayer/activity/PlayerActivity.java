@@ -40,11 +40,8 @@ public class PlayerActivity extends BaseActivity {
 
 	@Override
 	public void onBackPressed() {
-		boolean val = ((FragmentBase) player).onBackPressed();
-		if (val != true) {
-			this.finish();
-			overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-		}
+		((FragmentBase) player).onBackPressed();
+		this.finish();
+		overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 	}
-
 }

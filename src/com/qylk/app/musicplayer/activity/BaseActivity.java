@@ -10,7 +10,6 @@ import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.fragment.NavigationFragment;
 
 public class BaseActivity extends SlidingFragmentActivity {
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,8 +28,7 @@ public class BaseActivity extends SlidingFragmentActivity {
 						Fragment.instantiate(this,
 								NavigationFragment.class.getName())).commit();
 	}
-	
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		toggle();

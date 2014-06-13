@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.mobeta.android.dslv.DragSortListView.DragSortListener;
 import com.qylk.app.musicplayer.R;
-import com.qylk.app.musicplayer.fragment.NowPlayingCursor;
+import com.qylk.app.musicplayer.service.NowPlayingCursor;
 
 public class TrackListAdapter extends SimpleCursorAdapter implements
 		DragSortListener {

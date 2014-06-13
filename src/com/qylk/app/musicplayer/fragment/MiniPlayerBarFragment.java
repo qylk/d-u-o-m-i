@@ -23,6 +23,7 @@ import com.qylk.app.musicplayer.service.MediaPlaybackService;
 import com.qylk.app.musicplayer.utils.MusicUtils;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
 import com.qylk.app.musicplayer.utils.ServiceProxy.ServiceProxyRegisterListener;
+import com.qylk.app.ui.FocusableFragment;
 
 public class MiniPlayerBarFragment extends Fragment implements
 		ServiceProxyRegisterListener {
@@ -216,6 +217,7 @@ public class MiniPlayerBarFragment extends Fragment implements
 		getFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.in_from_right, 0).show(player)
 				.commit();
+		((FocusableFragment) player).requestFragemntFocus();
 		Log.v(getClass().getSimpleName(), "Startting Player Activity");
 	}
 

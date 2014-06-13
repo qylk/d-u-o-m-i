@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.qylk.app.musicplayer.R;
-import com.qylk.app.musicplayer.adapter.TrackListAdapter;
 import com.qylk.app.musicplayer.fragment.common.SimpleTrackListFragment;
-import com.qylk.app.musicplayer.utils.MediaDatabase;
 import com.qylk.app.ui.widget.SearchBox;
 import com.qylk.app.ui.widget.SearchBox.OnQueryTextListener;
 
@@ -35,8 +34,8 @@ public class SearchFragment extends SimpleTrackListFragment implements Callback 
 
 	@Override
 	public void onPause() {
-		sb.setImeVisibility(false);
 		super.onPause();
+		sb.setImeVisibility(false);
 	}
 
 	private OnQueryTextListener queryListener = new OnQueryTextListener() {
@@ -75,17 +74,12 @@ public class SearchFragment extends SimpleTrackListFragment implements Callback 
 			mStrBulder.append("%' or artist like '%");
 			mStrBulder.append(queryText);
 			mStrBulder.append("%'");
-			setListType(SimpleTrackListFragment.TYPE_SEARCH);
-			TrackListAdapter adapter = (TrackListAdapter) getListAdapter();
-			adapter.changeCursor(createCursor(mStrBulder.toString()));
-			adapter.notifyDataSetChanged();
-			updateHeaderView();
+
+			Bundle argument = new Bundle();
+			argument.putString("selection", mStrBulder.toString());
+			getLoaderManager().restartLoader(0, argument, this);
 		}
 		return true;
-	}
-
-	private Cursor createCursor(String sel) {
-		return MediaDatabase.getSearchCursor(getActivity(), sel);
 	}
 
 }
