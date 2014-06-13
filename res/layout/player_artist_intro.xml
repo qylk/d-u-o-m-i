@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/dark_grey"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/line_h_height"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/line_h_dark" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="6.0dip"
+        android:paddingTop="6.0dip" >
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="112.0dip"
+            android:layout_height="112.0dip"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="5.0dp"
+            android:background="@drawable/bg_artist_info_portrait"
+            android:padding="2dp"
+            android:src="@drawable/default_artist_s" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_cell_navigation"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/artsit"
+                    style="@style/PlayerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="43.0dip"
+                    android:layout_weight="1.0"
+                    android:drawableLeft="@drawable/icon_player_artist"
+                    android:drawablePadding="6.0dip"
+                    android:gravity="left|center"
+                    android:paddingBottom="6.0dip"
+                    android:paddingTop="6.0dip" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:layout_marginRight="15.0dip"
+                    android:layout_weight="0.0"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="6.0dip"
+                    android:paddingTop="6.0dip"
+                    android:text=">"
+                    android:textColor="#ff888888" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/line_h_height"
+                android:background="@drawable/line_h_dark" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_cell_navigation"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/album"
+                    style="@style/PlayerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="43.0dip"
+                    android:layout_weight="1.0"
+                    android:drawableLeft="@drawable/icon_player_album"
+                    android:drawablePadding="6.0dip"
+                    android:gravity="left|center"
+                    android:paddingBottom="6.0dip"
+                    android:paddingTop="6.0dip" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:layout_marginRight="15.0dip"
+                    android:layout_weight="0.0"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="6.0dip"
+                    android:paddingTop="6.0dip"
+                    android:text=">"
+                    android:textColor="#ff888888" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/line_h_height"
+                android:background="@drawable/line_h_dark" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_cell_navigation"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/mlist"
+                    style="@style/PlayerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="43.0dip"
+                    android:layout_weight="1.0"
+                    android:drawableLeft="@drawable/navigation_playlist"
+                    android:drawablePadding="6.0dip"
+                    android:gravity="left|center"
+                    android:paddingBottom="6.0dip"
+                    android:paddingTop="6.0dip" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:layout_marginRight="15.0dip"
+                    android:layout_weight="0.0"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="6.0dip"
+                    android:paddingTop="6.0dip"
+                    android:text=">"
+                    android:textColor="#ff888888" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/line_h_height"
+                android:background="@drawable/line_h_dark" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/detailLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none" >
+
+        <TextView
+            android:id="@+id/detail"
+            style="@style/PlayerSubTitleMultiLine"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="none"
+            android:lineSpacingExtra="6.0dip"
+            android:paddingLeft="14.0dip"
+            android:paddingRight="14.0dip"
+            android:paddingTop="4.0dip"
+            android:singleLine="false" />
+    </ScrollView>
+
+</LinearLayout>

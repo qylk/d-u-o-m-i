@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/searchbox"
+        layout="@layout/searchbox" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_color"
+        android:text="搜索结果" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_h_height"
+        android:background="@drawable/line_h_light" />
+
+</LinearLayout>

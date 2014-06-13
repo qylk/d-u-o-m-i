@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">QMUSIC</string>
+    <string name="str_test">Text Here</string>
+    <string name="str_test_long">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="mediaplaybacklabel">QMusicPlayBackService</string>
+    <string name="playback_failed">Sorry, the player does not support this type of audio file.</string>
+    <string name="trackended">PlayList is Empty Now!</string>
+    <string name="navigation_set">设置</string>
+    <string name="menu_sleep_new">定时音乐</string>
+    <string name="navigation_quit">退出</string>
+
+</resources>

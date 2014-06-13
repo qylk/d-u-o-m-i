@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 虚假的搜索框，只用于显示，MianFragment.java -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_searchbox"
+    android:paddingLeft="@dimen/local_mytrack_genre_left_padding" >
+
+    <View
+        android:layout_width="2.0px"
+        android:layout_height="58.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/local_mytrack_genre_line_left_margin"
+        android:background="@drawable/line_v" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48.0dip"
+        android:layout_marginLeft="9.0dip"
+        android:layout_marginRight="10.0dip"
+        android:layout_marginTop="10.0dip"
+        android:background="@drawable/bg_mymusic_search" >
+
+        <ImageButton
+            android:id="@+id/btn"
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_actionbar_item"
+            android:clickable="false"
+            android:src="@drawable/btn_search" />
+
+        <TextView
+            android:id="@+id/edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="2.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="2.0dip"
+            android:layout_toLeftOf="@id/btn"
+            android:background="#00000000"
+            android:gravity="left|center"
+            android:hint="搜搜你想听的音乐~"
+            android:singleLine="true"
+            android:textColorHint="@color/text_light_grey"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

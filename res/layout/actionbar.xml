@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- actionbar视图，ActionBarCompat.java -->
+<com.qylk.app.ui.ActionBarCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ActionBarCompat"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:gravity="center_vertical" >
+
+    <ImageButton
+        android:id="@+id/actionbar_nav"
+        style="@style/ActionBarCompatItem"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/actionbar_menu" />
+
+    <TextView
+        android:id="@+id/actionbar_count"
+        style="@style/tabCountText"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@id/actionbar_nav"
+        android:layout_marginRight="3.0dip"
+        android:layout_marginTop="3.0dip"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/new_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@id/actionbar_nav"
+        android:layout_marginRight="8.0dip"
+        android:layout_marginTop="10.0dip"
+        android:src="@drawable/icon_new"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="1.3dip"
+        android:layout_height="@dimen/actionbar_divider_height"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/actionbar_nav"
+        android:background="@drawable/line_actionbar_divider" />
+
+    <LinearLayout
+        android:id="@+id/extraLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toLeftOf="@+id/extraLayout"
+        android:layout_toRightOf="@id/line" >
+
+        <TextView
+            android:id="@+id/subtitle"
+            style="@style/ActionBarCompatTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10.0dip"
+            android:paddingRight="0.0dip"
+            android:text="@string/app_name"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/actionbar_title_group"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@id/subtitle"
+            android:layout_alignWithParentIfMissing="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/ActionBarCompatTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="4.0dip"
+                android:paddingLeft="10.0dip"
+                  android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+                android:paddingRight="10.0dip"
+                android:text="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/actionbar_title_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/tree_menu_slidejatou"
+                android:visibility="gone" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/actionbar_bottom_divider_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red" />
+
+    <View
+        android:layout_width="@dimen/actionbar_back_bottom_width"
+        android:layout_height="@dimen/actionbar_bottom_back_divider_height"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_actionbar_btn_line" />
+
+</com.qylk.app.ui.ActionBarCompat>

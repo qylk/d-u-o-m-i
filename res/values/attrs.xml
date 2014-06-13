@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="indicator">
+        <attr name="indicator_drawable" format="reference" />
+        <attr name="indicator_margin" format="reference|dimension" />
+    </declare-styleable>
+    <declare-styleable name="roundImageView">
+        <attr name="padding" format="dimension" />
+    </declare-styleable>
+
+</resources>

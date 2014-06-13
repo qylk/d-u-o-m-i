@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="pic_album" type="id">false</item>
+    <item name="moredlgview" type="id">false</item>
+    <item name="btn_back" type="id">false</item>
+    <item name="btn_more" type="id">false</item>
+    <item name="display_artist1" type="id">false</item>
+    <item name="display_title2" type="id">false</item>
+    <item name="btn_nowplaying" type="id">false</item>
+    <item name="listheadertitle" type="id">false</item>
+    <item name="librarylist" type="id">false</item>
+    <item name="tabContent" type="id">false</item>
+    <item name="fragmentTabHost" type="id">false</item>
+    <item name="display_album" type="id">false</item>
+    <item name="display_artist2" type="id">false</item>
+    <item name="btn_addto" type="id">false</item>
+    <item name="btn_star" type="id">false</item>
+    <item name="btn_share" type="id">false</item>
+    <item name="btn_radio" type="id">false</item>
+    <item name="ltitle" type="id">false</item>
+    <item name="lartist" type="id">false</item>
+    <item name="btn_last" type="id">false</item>
+    <item name="circleProgressBar" type="id">false</item>
+    <item name="display_title1" type="id">false</item>
+    <item name="btn_play" type="id">false</item>
+    <item name="display_time" type="id">false</item>
+    <item name="btn_next" type="id">false</item>
+    <item name="searchview" type="id">false</item>
+    <item name="icon" type="id">false</item>
+    <item name="tracktmsg" type="id">false</item>
+    <item name="statusbar_pause" type="id">false</item>
+    <item name="statusbar_next" type="id">false</item>
+    <item name="switch1" type="id">false</item>
+    <item name="switch2" type="id">false</item>
+    <item name="tabitem" type="id">false</item>
+    <item name="tab_icon" type="id">false</item>
+    <item name="tab_text" type="id">false</item>
+    <item name="action_settings" type="id">false</item>
+    
+    <!--一下必须-->
+    <item name="selected_view" type="id"/>
+    <item name="expandable_btn" type="id"/>
+    <item name="expandable_view" type="id"/>
+
+</resources>

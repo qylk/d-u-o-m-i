@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--歌曲列表类型的标题背景，MianFragment.java-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gradient_mytrack_genre"
+    android:paddingLeft="@dimen/local_mytrack_genre_left_padding" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/cell_genre_height" >
+
+        <View
+            android:id="@+id/vline"
+            android:layout_width="2.0px"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/local_mytrack_genre_line_left_margin"
+            android:background="@drawable/line_v" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="14.0dip"
+            android:layout_height="14.0dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2.0dip"
+            android:background="@drawable/icon_mytrack_genre" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/CellGenreText"
+            android:layout_toRightOf="@id/image"
+            android:paddingLeft="6.0dip" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/line_h_height"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/vline"
+            android:background="@drawable/line_h_light" />
+
+        <View
+            android:id="@+id/subline"
+            android:layout_width="fill_parent"
+            android:layout_height="2.0dip"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/vline"
+            android:background="@color/green" />
+    </RelativeLayout>
+
+</RelativeLayout>

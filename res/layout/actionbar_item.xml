@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- actionbar 菜单按钮 ，ActionBarCompat.java-->
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ActionBarCompatItem"
+    android:layout_width="@dimen/actionbar_button_width"
+    android:layout_height="fill_parent" />

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 对话框视图 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DialogLayout"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dialog_title_height"
+        layout="@layout/dialog_title" />
+
+    <TextView
+        android:id="@+id/dialog_content"
+        style="@style/DialogContentText"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_marginLeft="@dimen/cell_layout_padding"
+        android:layout_marginRight="@dimen/cell_layout_padding"
+        android:layout_weight="1.0"
+        android:gravity="left|center"
+        android:minHeight="60.0dip"
+        android:padding="0.0dip" />
+
+    <TextView
+        android:id="@+id/dialog_ps"
+        style="@style/DialogPSText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/cell_layout_padding"
+        android:layout_marginRight="@dimen/cell_layout_padding"
+        android:drawableLeft="@drawable/bubble_tip"
+        android:gravity="left|center"
+        android:minHeight="40.0dip"
+        android:padding="0.0dip"
+        android:visibility="gone" />
+
+    <include layout="@layout/dialog_buttons" />
+
+    <RelativeLayout
+        android:id="@+id/dialog_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="5.0dip"
+        android:visibility="gone" >
+
+        <com.qylk.app.ui.widget.CheckBox
+            android:id="@+id/dialog_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_checkbox_small" />
+
+        <TextView
+            android:id="@+id/dialog_checkbox_tv"
+            style="@style/SubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/dialog_checkbox"
+            android:gravity="center"
+            android:padding="0.0dip" />
+    </RelativeLayout>
+
+</LinearLayout>

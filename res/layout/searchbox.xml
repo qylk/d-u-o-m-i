@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qylk.app.ui.widget.SearchBox xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="52.0dip"
+        android:background="@drawable/gradinet_search_head" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/actionbar_height"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:background="@drawable/bg_search_edittext"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10.0dip"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:gravity="left|center"
+            android:layout_gravity="center_vertical"
+            android:hint="歌手名/歌曲名/歌词"
+            android:singleLine="true"
+            android:textColorHint="@color/text_light_grey"
+            android:textSize="16.0dip" />
+
+        <ImageButton
+            android:id="@+id/del"
+            android:layout_width="@dimen/actionbar_button_width"
+            android:layout_height="@dimen/actionbar_height"
+            android:layout_weight="0"
+            android:background="@drawable/bg_actionbar_item"
+            android:src="@drawable/edit_del"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/btn"
+            android:layout_width="@dimen/actionbar_button_width"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@drawable/bg_actionbar_item"
+            android:src="@drawable/btn_search"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</com.qylk.app.ui.widget.SearchBox>

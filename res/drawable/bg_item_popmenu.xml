@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true"><layer-list>
+            <item android:bottom="0.0px"><shape>
+                    <solid android:color="#4c000000" />
+                </shape></item>
+        </layer-list></item>
+    <item><layer-list>
+            <item android:right="0.0px"><shape>
+                    <solid android:color="@color/bg_item_popmenu" />
+                </shape></item>
+        </layer-list></item>
+
+</selector>

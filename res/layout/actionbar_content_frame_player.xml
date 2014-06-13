@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 带有播放列表的ActionBar的视图框架，专用于播放界面，PlayerFragment.java -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- simple actionbar -->
+
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/actionbar_player" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <!-- queue view -->
+
+        <ViewStub
+            android:id="@+id/queue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/queue" />
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>

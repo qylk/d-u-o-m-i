@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 对话框三个按钮,DialogButtons.java -->
+<com.qylk.app.ui.cell.dialog.DialogButtons xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_buttons"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="8.0dip"
+    android:paddingLeft="@dimen/cell_layout_padding"
+    android:paddingRight="@dimen/cell_layout_padding"
+    android:paddingTop="8.0dip"
+    android:visibility="visible" >
+
+    <Button
+        android:id="@+id/dialog_btn1"
+        style="@style/DialogBtnText"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/dialog_button_height"
+        android:layout_weight="1.0"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/dialog_btn2"
+        style="@style/DialogBtnText"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/dialog_button_height"
+        android:layout_weight="1.0"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/dialog_btn3"
+        style="@style/DialogBtnText"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/dialog_button_height"
+        android:layout_weight="1.0"
+        android:visibility="visible" />
+
+</com.qylk.app.ui.cell.dialog.DialogButtons>

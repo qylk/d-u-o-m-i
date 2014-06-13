@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--     <dimen name="normal_height">66dip</dimen> -->
+<!--     <dimen name="expanded_height">132dip</dimen> -->
+    <dimen name="line_h_height">2px</dimen>
+    <dimen name="track_menu_item_width">60.0dip</dimen>
+	<!--     actionbar -->
+    <dimen name="actionbar_height">48.0dip</dimen>
+    <dimen name="actionbar_divider_height">36.0dip</dimen>
+    <dimen name="actionbar_back_bottom_width">49.333282dip</dimen>
+    <dimen name="actionbar_bottom_back_divider_height">3.0dip</dimen>
+    <dimen name="actionbar_button_width">48.0dip</dimen>
+   <!--     popmenu -->
+    <dimen name="popmenu_item_width">156.0dip</dimen>
+    <dimen name="popmenu_item_height">48.0dip</dimen>
+    <dimen name="popmenu_pading">4.0dip</dimen>
+    <dimen name="popmenu_right_marign">4.0dip</dimen>
+    <dimen name="popmenu_top_marign">4.0dip</dimen>
+    
+     <!--     popmenu -->
+    <dimen name="pop_top_distance">-4.0dip</dimen>
+    <dimen name="player_play_bar_height">48.0dip</dimen>
+    <dimen name="cell_divider_height">1.0px</dimen>
+    <dimen name="cell_margin">0.0dip</dimen>
+    <dimen name="cell_height">52.0dip</dimen>
+    <dimen name="cell_layout_padding">14.0dip</dimen>
+    <dimen name="dialog_title_height">48.0dip</dimen>
+    <dimen name="actionbar_bottom_divider_height">1.0dip</dimen>
+    <dimen name="dialog_button_height">40.0dip</dimen>
+    <dimen name="local_mytrack_genre_line_left_margin">8.0dip</dimen>
+    <dimen name="local_mytrack_genre_left_padding">20.0dip</dimen>
+    <dimen name="cell_genre_height">28.0dip</dimen>
+    <dimen name="player_action_bar_height">48.0dip</dimen>
+<!--     <dimen name="progressBar_TipText_size">12sp</dimen> -->
+
+</resources>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- <style name="AppTheme" parent="@android:style/Theme.Holo.Light"> -->
+    <!-- <item name="android:windowFullscreen">true</item> -->
+    <!-- <item name="android:windowContentOverlay">@null</item> -->
+    <!-- <item name="android:actionBarStyle">@style/MyActionBar</item> -->
+    <!-- </style> -->
+
+
+    <!-- <style name="AppText"> -->
+    <!-- <item name="android:textSize">16.0dip</item> -->
+    <!-- <item name="android:textColor">@color/dark_grey</item> -->
+    <!-- </style> -->
+
+
+    <!-- <style name="MyActionBar" parent="@android:style/Widget.Holo.ActionBar"> -->
+    <!-- <item name="android:background">#ff2B2B2B</item> -->
+    <!-- </style> -->
+
+    <style name="TrackMenu">
+        <item name="android:textSize">12.0dip</item>
+        <item name="android:textColor">#fff5f5f5</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/bg_trackmenu</item>
+        <item name="android:paddingTop">7.0dip</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">0.0dip</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:drawablePadding">2.0dip</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="ActionBarCompat">
+        <item name="android:background">@drawable/bg_actionbar</item>
+        <item name="android:layout_height">@dimen/actionbar_height</item>
+    </style>
+
+    <style name="ActionBarCompatItem">
+        <item name="android:background">@drawable/bg_actionbar_item</item>
+        <item name="android:padding">4.0dip</item>
+        <item name="android:layout_width">@dimen/actionbar_button_width</item>
+        <item name="android:layout_height">@dimen/actionbar_height</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="ActionBarCompatTitle">
+        <item name="android:textSize">18.0dip</item>
+        <item name="android:textColor">@color/actionbar_title_color</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">6.0dip</item>
+        <item name="android:paddingRight">6.0dip</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="PopMenuItem">
+        <item name="android:background">@drawable/bg_item_popmenu</item>
+        <item name="android:drawablePadding">4.0dip</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:paddingLeft">5.0dip</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="tabCountText">
+        <item name="android:textSize">10.0dip</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/bg_msg_count</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="VolumeSeekbar">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">18.0dip</item>
+        <item name="android:paddingRight">9.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:progress">0</item>
+        <item name="android:progressDrawable">@drawable/volume_progress_drawable</item>
+        <item name="android:thumb">@drawable/volume_thumb</item>
+        <item name="android:thumbOffset">9.0dip</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="List">
+        <item name="android:background">@color/bg_list</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:fadingEdgeLength">0.0dip</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:scrollingCache">false</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:divider">@null</item>
+        <item name="android:dividerHeight">0.0px</item>
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:overScrollFooter">@android:color/transparent</item>
+        <item name="android:fastScrollAlwaysVisible">false</item>
+    </style>
+
+    <style name="Cell">
+        <item name="android:background">@drawable/bg_cell</item>
+        <item name="android:paddingLeft">@dimen/cell_layout_padding</item>
+        <item name="android:paddingRight">@dimen/cell_layout_padding</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/cell_height</item>
+        <item name="android:minHeight">@dimen/cell_height</item>
+    </style>
+
+    <style name="Cell.Navigation" parent="@style/Cell">
+        <item name="android:background">@drawable/bg_cell_navigation</item>
+        <item name="android:paddingLeft">0.0dip</item>
+        <item name="android:paddingTop">3.0dip</item>
+        <item name="android:paddingRight">0.0dip</item>
+    </style>
+
+    <style name="DialogLayout">
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/bg_dialog</item>
+        <item name="android:padding">4.0dip</item>
+        <item name="android:layout_width">300.0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">0.0dip</item>
+    </style>
+
+    <style name="DialogContentText">
+        <item name="android:textSize">18.0dip</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:padding">4.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="DialogPSText">
+        <item name="android:textSize">14.0dip</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:padding">4.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SubTitle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/text_dim_foreground_dark</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="DialogTitleText">
+        <item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:padding">0.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="DialogBtnText">
+        <item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_dialog_button</item>
+        <item name="android:padding">0.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="CellGenreText">
+        <item name="android:textSize">12.0dip</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:paddingLeft">14.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="PlayerActionBar">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/player_action_bar_height</item>
+    </style>
+
+    <style name="PlayerBarCompatItem">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">@dimen/actionbar_button_width</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="PlayerSubTitle">
+        <item name="android:textSize">12.0dip</item>
+        <item name="android:textColor">@color/text_light_grey</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="PlayerTitle">
+        <item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">bottom|left|center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- <style name="CellSubTitle.Queue" parent="@style/CellSubTitle"> -->
+    <!-- <item name="android:textColor">@drawable/txt_cell_queue_subtitle</item> -->
+    <!-- <item name="android:paddingLeft">9.0dip</item> -->
+    <!-- </style> -->
+
+    <style name="PlayerSeekbar">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">6.0dip</item>
+        <item name="android:paddingRight">6.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:progress">0</item>
+        <item name="android:progressDrawable">@drawable/player_progress_drawable</item>
+        <item name="android:thumb">@drawable/player_progress_thumb</item>
+        <item name="android:thumbOffset">9.0dip</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="PlayerPlayBar">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/player_play_bar_height</item>
+    </style>
+
+    <style name="PlayerBarCompatItem.Player" parent="@style/PlayerBarCompatItem">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="PlayerOperationBarItem">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">42.0dip</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="TrackMenu.Player" parent="@style/TrackMenu">
+        <item name="android:textColor">#fff5f5f5</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="PlayerSubTitleMultiLine" parent="@style/PlayerSubTitle">
+        <item name="android:textSize">14.0dip</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:singleLine">false</item>
+    </style>
+
+</resources>

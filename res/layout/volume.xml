@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qylk.app.ui.VolumeAdjustView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_volume" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150.0dip" >
+
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/player_play_bar_height"
+            android:layout_alignParentBottom="true" >
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="92.0dip"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@id/view" >
+
+                <View
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0" />
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/volume_close" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/progress"
+                style="@style/VolumeSeekbar"
+                android:layout_centerVertical="true"
+                android:maxHeight="6.0dip" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="72.0dip"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="1.0dip"
+            android:textColor="@android:color/white"
+            android:textSize="50.0dip" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/title"
+            android:layout_toLeftOf="@id/title"
+            android:text="."
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="20.0dip" />
+
+        <TextView
+            android:id="@+id/subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/subtitle"
+            android:layout_toLeftOf="@id/subtitle"
+            android:text="vol"
+            android:textColor="@android:color/white"
+            android:textSize="16.0dip" />
+    </RelativeLayout>
+
+</com.qylk.app.ui.VolumeAdjustView>

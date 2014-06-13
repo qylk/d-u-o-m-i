@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- sortableListView拖动时的Item颜色 -->
+    <color name="float_color">#ff33b5e5</color>
+    <!-- 暗色背景文字颜色 -->
+    <color name="text_dim_foreground_dark">#ffbebebe</color>
+     <!-- 灰色文字颜色，常用亮色背景上 -->
+    <color name="text_light_grey">#ffacacac</color>
+    <color name="green_dark">#ff7ba11d</color>
+    <color name="app_color">#fff5f5f5</color>
+    <color name="green">#ff78a00a</color>
+    <color name="bg_navigation_cell_pressed">#ff272727</color>
+    <color name="bg_pressed">#19000000</color>
+    <color name="bg_normal">@android:color/transparent</color>
+    <color name="red">#ffe60050</color>
+    <color name="txt_cell_mytrack_subtitle_normal">#ff747474</color>
+    <color name="txt_cell_mytrack_disabled">#ff323232</color>
+    <color name="bg_cell_mytrack_focused">@color/bg_cell_mytrack_normal</color>
+    <color name="actionbar_title_color">#ff323232</color>
+    <color name="dark_grey">#ff2b2b2b</color>
+    <color name="txt_cell_mytrack_selected">#ff323232</color>
+    <color name="bg_cell_mytrack_normal">#f2ffffff</color>
+    <color name="bg_cell_mytrack_pressed">@android:color/white</color>
+    <color name="bg_item_popmenu">@android:color/transparent</color>
+    <color name="bg_cell_focused">@android:color/transparent</color>
+    <color name="bg_cell_selected">@android:color/transparent</color>
+    <color name="bg_cell_normal">@android:color/transparent</color>
+    <color name="bg_cell_dissable">@color/bg_cell_normal</color>
+    <color name="bg_cell_pressed">@android:color/white</color>
+    <color name="txt_cell_subtitle_pressed">@color/txt_cell_subtitle_normal</color>
+    <color name="bg_list" type="color">@color/bg_normal</color>
+    <color name="txt_cell_subtitle_normal">#ff888888</color>
+    <color name="txt_cell_subtitle_disabled">#7f888888</color>
+    <color name="txt_cell_mytrack_subtitle_pressed">@color/txt_cell_mytrack_subtitle_normal</color>
+    <color name="txt_cell_queue_subtitle_normal">#ff8f8f8f</color>
+    <color name="txt_cell_queue_subtitle_selected">@color/green</color>
+    <color name="txt_cell_queue_subtitle_disabled">#ff8f8f8f</color>
+    <color name="txt_cell_queue_subtitle_pressed">#ff8f8f8f</color>
+
+</resources>

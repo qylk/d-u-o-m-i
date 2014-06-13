@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qylk.app.ui.listview.ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color"
+    android:cacheColorHint="#00000000"
+    android:divider="@drawable/line_h_light"
+    android:dividerHeight="@dimen/line_h_height"
+    android:fastScrollEnabled="true"
+    android:textSize="18sp" />

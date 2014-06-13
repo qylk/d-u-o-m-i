@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qylk.app.ui.listview.ListCellLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/num"
+            style="@android:style/TextAppearance.DeviceDefault.Medium.Inverse"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center" />
+
+        <!-- The height is set to half the height of the parent, which is 64 dip -->
+
+        <ImageButton
+            android:id="@android:id/toggle"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:focusable="false"
+            android:paddingLeft="25dp"
+            android:paddingTop="25dp"
+            android:src="@drawable/bg_action_arrow"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@id/expandable_btn"
+            android:layout_toRightOf="@id/num"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@string/str_test_long"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black" />
+
+        <!-- The height is set to half the height of the parent, which is 64 dip -->
+
+        <TextView
+            android:id="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@id/line1"
+            android:layout_marginBottom="5dp"
+            android:layout_toLeftOf="@id/expandable_btn"
+            android:layout_toRightOf="@id/num"
+            android:ellipsize="end"
+            android:enabled="false"
+            android:singleLine="true"
+            android:text="@string/str_test"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/darker_gray" />
+    </RelativeLayout>
+
+    <include layout="@layout/track_list_popdown_item" />
+
+</com.qylk.app.ui.listview.ListCellLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/minibar"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@drawable/navigation_background" >
+
+    <View
+        android:id="@+id/miniprogress"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_simple_progress" />
+
+    <ImageView
+        android:id="@+id/albumicon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@id/miniprogress"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/icon_edge"
+        android:src="@drawable/ic_music" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@id/albumicon"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/line1"
+            style="?android:attr/textAppearanceMedium"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/str_test_long"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/line2"
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/str_test"
+            android:textColor="@color/text_dim_foreground_dark"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@id/btn_next"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/main_next" />
+
+    <ImageView
+        android:id="@id/btn_play"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/btn_next"
+        android:src="@drawable/main_play" />
+
+    <ImageView
+        android:id="@id/btn_last"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/btn_play"
+        android:src="@drawable/main_prev" />
+
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 专用于Player界面的actionbar，简版的actionbar.xml,PlayerFragment.java -->
+<com.qylk.app.ui.ActionBarCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ActionBarCompat"
+    android:layout_width="match_parent"
+    android:background="@color/dark_grey"
+    android:gravity="center_vertical" >
+
+    <ImageButton
+        android:id="@+id/actionbar_nav"
+        style="@style/ActionBarCompatItem"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/player_actionbar_bck" />
+
+    <LinearLayout
+        android:id="@+id/extraLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toLeftOf="@id/extraLayout"
+        android:layout_toRightOf="@id/actionbar_nav"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/subtitle"
+            style="@style/ActionBarCompatTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="top"
+            android:paddingBottom="3dp"
+            android:paddingRight="10.0dip"
+            android:text="@string/app_name"
+            android:textColor="@color/text_dim_foreground_dark"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/ActionBarCompatTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/subtitle"
+            android:layout_alignWithParentIfMissing="true"
+            android:drawablePadding="4.0dip"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="bottom"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingRight="10.0dip"
+            android:paddingTop="3dp"
+            android:text="@string/str_test"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</com.qylk.app.ui.ActionBarCompat>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 歌曲类型列表，MainFragment.java -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/local_mytrack_genre_left_padding" >
+
+    <View
+        android:layout_width="2.0px"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/local_mytrack_genre_line_left_margin"
+        android:background="@drawable/line_v" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/listdivider_white"
+        android:dividerHeight="3.0px"
+        android:focusable="false"
+        android:listSelector="@drawable/genrelist_selector" >
+    </ListView>
+
+</LinearLayout>
