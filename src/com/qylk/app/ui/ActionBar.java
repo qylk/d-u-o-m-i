@@ -14,7 +14,7 @@ public interface ActionBar {
 
 	public void setHomeIcon(Drawable homeIcon);
 
-	public void setBackground(Drawable background);
+	public void setBackgroundDrawable(Drawable background);
 
 	public void setBackgroundColor(int color);
 

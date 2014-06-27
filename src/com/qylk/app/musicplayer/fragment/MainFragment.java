@@ -1,6 +1,8 @@
 package com.qylk.app.musicplayer.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.activity.MainActivity;
 import com.qylk.app.musicplayer.adapter.ListGenerAdapter;
+import com.qylk.app.musicplayer.fragment.common.SimpleTrackListFragment;
+import com.qylk.app.musicplayer.utils.MEDIA;
 import com.qylk.app.ui.ActionBar;
 import com.qylk.app.ui.ActionBarFragment;
 import com.qylk.app.ui.menu.ActionBarMenuItem;
@@ -32,7 +37,7 @@ public class MainFragment extends ActionBarFragment implements
 		LinearLayout ll = new LinearLayout(context, null);
 		container.addView(ll);
 		ll.setOrientation(LinearLayout.VERTICAL);
-		ll.setBackground(context.getResources().getDrawable(
+		ll.setBackgroundDrawable(context.getResources().getDrawable(
 				R.drawable.gradient_mytrack_genre));
 		View searchView = inflater.inflate(R.layout.false_searchbox, null);
 		searchView.setOnClickListener(new OnClickListener() {
@@ -67,20 +72,15 @@ public class MainFragment extends ActionBarFragment implements
 		((TextView) headerview.findViewById(R.id.title)).setText(header);
 		return headerview;
 	}
+	
 
 	@Override
 	protected void onCreateActionBar(ActionBar act) {
 		super.onCreateActionBar(act);
 		act.setHomeIcon(getResources().getDrawable(R.drawable.actionbar_menu));
 		act.setHomeClicklistener(homeClickListener);
-		act.addMenuItem(new ActionBarMenuItem("ËÑË÷2", getResources()
-				.getDrawable(R.drawable.btn_search), 0));
-		act.addMenuItem(new ActionBarMenuItem("ËÑË÷3", getResources()
-				.getDrawable(R.drawable.btn_search), 1));
-		act.addMenuItem(new ActionBarMenuItem("ËÑË÷4", getResources()
-				.getDrawable(R.drawable.btn_search), 2));
-		act.addMenuItem(new ActionBarMenuItem("ËÑË÷5", getResources()
-				.getDrawable(R.drawable.btn_search), 3));
+		act.addMenuItem(new ActionBarMenuItem("É¨Ãè", getResources().getDrawable(
+				R.drawable.actionbar_scan), 0));
 	}
 
 	@Override
@@ -101,9 +101,8 @@ public class MainFragment extends ActionBarFragment implements
 	protected void onActionMenuSelected(ActionBarMenuItem item) {
 		super.onActionMenuSelected(item);
 		if (item.getId() == 0) {
-			// Fragment frg = Fragment.instantiate(getActivity(), fname, args);
-			// getFragmentManager().beginTransaction().add(getContentId(), frg,
-			// frg.getClass().getSimpleName());
+			Toast.makeText(getActivity(), "É¨Ãè¿ªÊ¼", Toast.LENGTH_SHORT).show();
+			getActivity().sendBroadcast(new Intent(MEDIA.SCAN_ACTION));
 		}
 	}
 

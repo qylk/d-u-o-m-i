@@ -76,9 +76,9 @@ class ServiceStub extends IMediaPlaybackService.Stub {
 		mService.get().next(false);
 	}
 
-	public void openFile(String filepath) {
+/*	public void openFile(String filepath) {
 		mService.get().open(filepath);
-	}
+	}*/
 
 	public void pause() {
 		mService.get().pause();

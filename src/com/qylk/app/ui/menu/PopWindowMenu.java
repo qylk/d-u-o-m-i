@@ -63,7 +63,7 @@ public class PopWindowMenu extends PopWindow implements View.OnClickListener {
 				divider.setLayoutParams(new LinearLayout.LayoutParams(
 						android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
 						2));
-				divider.setBackground(mContext.getResources().getDrawable(
+				divider.setBackgroundDrawable(mContext.getResources().getDrawable(
 						R.drawable.line_h_actionbar_popmenu));
 				content.addView(divider);
 				view_height += 2;

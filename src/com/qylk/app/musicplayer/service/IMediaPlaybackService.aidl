@@ -4,7 +4,7 @@ package com.qylk.app.musicplayer.service;
 
 interface IMediaPlaybackService
 {
-    void openFile(String path);
+    //void openFile(String path);
     //int getQueuePosition();
     boolean isPlaying();
    // void playSelected(int id);

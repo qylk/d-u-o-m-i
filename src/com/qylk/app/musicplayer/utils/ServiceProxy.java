@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import com.qylk.app.musicplayer.service.IMediaPlaybackService;
-import com.qylk.app.musicplayer.service.MediaPlaybackService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -13,6 +11,9 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+
+import com.qylk.app.musicplayer.service.IMediaPlaybackService;
+import com.qylk.app.musicplayer.service.MediaPlaybackService;
 
 public class ServiceProxy {
 	public static class ServiceToken {
@@ -96,11 +97,14 @@ public class ServiceProxy {
 
 	public static void unregister(ServiceToken token,
 			ServiceProxyRegisterListener listener) {
-		if (listener != null)
-			sConnectionMap.remove(token);
+		if (token != null)
+			sConnectionMap.remove(token.mWrappedContext);
+		System.out.println("ssss:" + sConnectionMap.size());
 		if (sConnectionMap.isEmpty()) {
-			token.mWrappedContext.getApplicationContext()
-					.getApplicationContext().unbindService(localsc);
+			Context app = token.mWrappedContext;
+			app.getApplicationContext().unbindService(localsc);
+			if (!isPlaying())
+				app.stopService(new Intent(MediaPlaybackService.SERVICECMD));
 			sService = null;
 		}
 		if (listener != null)

@@ -1,15 +1,21 @@
 package com.qylk.app.musicplayer.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.fragment.MainFragment;
 import com.qylk.app.musicplayer.fragment.MiniPlayerBarFragment;
 import com.qylk.app.musicplayer.fragment.PlayerFragment2;
+import com.qylk.app.musicplayer.utils.MEDIA;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
 import com.qylk.app.musicplayer.utils.ServiceProxy.ServiceProxyRegisterListener;
 import com.qylk.app.ui.ActionBarFragment;
@@ -41,6 +47,27 @@ public class MainActivity extends BaseActivity implements
 		ft.hide(player);
 		((FocusableFragment) mListGenreFragment).requestFragemntFocus();
 		ft.commit();
+	}
+
+	private BroadcastReceiver updateListListener = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Toast.makeText(MainActivity.this, "…®√ËÕÍ±œ", Toast.LENGTH_LONG).show();
+		}
+	};
+	
+	protected void onResume() {
+		super.onResume();
+		IntentFilter f = new IntentFilter();
+		f.addAction(MEDIA.INTENT_SCAN_DONE);
+		registerReceiver(updateListListener, f);
+	};
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterReceiver(updateListListener);
 	}
 
 	@Override

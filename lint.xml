@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
-    <issue id="HandlerLeak">
+    <issue id="HandlerLeak" severity="ignore">
         <ignore path="src/com/qylk/app/musicplayer/fragment/ArtistArtFragment.java" />
         <ignore path="src/com/qylk/app/musicplayer/fragment/MiniPlayerBarFragment.java" />
         <ignore path="src/com/qylk/app/musicplayer/fragment/common/SimpleTrackListFragment.java" />

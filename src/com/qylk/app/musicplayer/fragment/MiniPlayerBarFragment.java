@@ -246,6 +246,9 @@ public class MiniPlayerBarFragment extends Fragment implements
 	@Override
 	public void onServiceProxyReady() {
 		serviceReady = true;
+		if (isResumed())
+			updatePanelView();
+
 	}
 
 	@Override

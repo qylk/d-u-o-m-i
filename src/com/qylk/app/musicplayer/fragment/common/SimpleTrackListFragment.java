@@ -16,11 +16,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CursorAdapter;
 import android.widget.ListAdapter;
-
 import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.adapter.TrackListAdapter;
 import com.qylk.app.musicplayer.service.MediaPlaybackService;
 import com.qylk.app.musicplayer.service.TrackIdProvider;
+import com.qylk.app.musicplayer.utils.MEDIA;
 import com.qylk.app.musicplayer.utils.MEDIA.AUDIO;
 import com.qylk.app.musicplayer.utils.MediaDatabase;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
@@ -92,6 +92,15 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 		return header;
 	}
 
+	private BroadcastReceiver updateListListener = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			getLoaderManager().restartLoader(0, getArguments(),
+					SimpleTrackListFragment.this);
+		}
+	};
+
 	private BroadcastReceiver mPlayingPositionListener = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -144,6 +153,7 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 	@Override
 	public void onPause() {
 		getActivity().unregisterReceiver(mPlayingPositionListener);
+		getActivity().unregisterReceiver(updateListListener);
 		super.onPause();
 	}
 
@@ -153,6 +163,9 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 		f.addAction(MediaPlaybackService.META_CHANGED);
 		getActivity().registerReceiver(mPlayingPositionListener, f);
 		mPlayingPositionListener.onReceive(getActivity(), null);
+		IntentFilter f2 = new IntentFilter();
+		f2.addAction(MEDIA.INTENT_SCAN_DONE);
+		getActivity().registerReceiver(updateListListener, f2);
 		super.onResume();
 	}
 

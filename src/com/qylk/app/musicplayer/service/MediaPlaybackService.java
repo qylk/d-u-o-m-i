@@ -6,24 +6,25 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.activity.MainActivity;
+import com.qylk.app.musicplayer.utils.MEDIA;
+import com.qylk.app.musicplayer.utils.MEDIA.AUDIO;
 import com.qylk.app.musicplayer.utils.MediaDatabase;
 
 public class MediaPlaybackService extends Service implements MusicFocusable {
@@ -73,10 +74,10 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 	private int nowId;
 	private TrackIdProvider trackIdProvider;
 
-	String[] mCursorCols = new String[] { "audio._id AS _id",
-			MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM,
-			MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DATA,
-			MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.ARTIST_ID };
+	String[] mCursorCols = new String[] { MEDIA.AUDIO.FIELD_ARTIST,
+			MEDIA.AUDIO.FIELD_ALBUM, MEDIA.AUDIO.FIELD_TITLE,
+			MEDIA.AUDIO.FIELD_PATH, MEDIA.AUDIO.FIELD_ALBUM_ID,
+			MEDIA.AUDIO.FIELD_ARTIST_ID };
 
 	private Handler mDelayedStopHandler = new Handler() {
 		public void handleMessage(Message paramMessage) {
@@ -95,16 +96,17 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case FADEDOWN:
-				mCurrentVolume -= .05f;
-				if (mCurrentVolume > .4f) {
+				mCurrentVolume -= .025f;
+				if (mCurrentVolume > .1f) {
 					mMediaplayerHandler.sendEmptyMessageDelayed(FADEDOWN, 10);
 				} else {
-					mCurrentVolume = .4f;
+					mCurrentVolume = .1f;
+					doPause();
 				}
 				mPlayer.setVolume(mCurrentVolume * mCurrentVolume);
 				break;
 			case FADEUP:
-				mCurrentVolume += .02f;
+				mCurrentVolume += .015f;
 				if (mCurrentVolume < 1.0f) {
 					mMediaplayerHandler.sendEmptyMessageDelayed(FADEUP, 10);
 				} else {
@@ -152,7 +154,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 			return -1;
 		}
 		return mCursor.getInt(mCursor
-				.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID));
+				.getColumnIndexOrThrow(MEDIA.AUDIO.FIELD_ALBUM_ID));
 	}
 
 	public String getAlbumName() {
@@ -160,7 +162,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 			return null;
 		}
 		return mCursor.getString(mCursor
-				.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+				.getColumnIndexOrThrow(MEDIA.AUDIO.FIELD_ALBUM));
 	}
 
 	public int getArtistId() {
@@ -168,7 +170,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 			return -1;
 		}
 		return mCursor.getInt(mCursor
-				.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST_ID));
+				.getColumnIndexOrThrow(MEDIA.AUDIO.FIELD_ARTIST_ID));
 	}
 
 	public String getArtistName() {
@@ -176,12 +178,8 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 			return null;
 		}
 		return mCursor.getString(mCursor
-				.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST));
+				.getColumnIndexOrThrow(MEDIA.AUDIO.FIELD_ARTIST));
 	}
-
-	// public TrackIdProvider getListProvider() {
-	// return trackIdProvider;
-	// }
 
 	public String getPath() {
 		return mFileToPlay;
@@ -200,7 +198,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 			return null;
 		}
 		return mCursor.getString(mCursor
-				.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));
+				.getColumnIndexOrThrow(MEDIA.AUDIO.FIELD_TITLE));
 	}
 
 	private void giveUpAudioFocus() {
@@ -232,7 +230,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 	public void next(boolean IdleIfEmpty) {
 		stop(false);
 		if (trackIdProvider.hasNext()) {
-			openCurrent(trackIdProvider.next());
+			open(trackIdProvider.next());
 			notifyChange(META_CHANGED);
 			play();
 		} else {
@@ -276,7 +274,8 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		// /* .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) */, 0);
 		// startForeground(PLAYBACKSERVICE_STATUS, notify);
 		// if (isPlaying())
-		startForeground(PLAYBACKSERVICE_STATUS, mBuilder.build());// API 16
+		startForeground(PLAYBACKSERVICE_STATUS, mBuilder.getNotification());// API
+																			// 16
 	}
 
 	private void notifyChange(String what) {
@@ -313,7 +312,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		trackIdProvider = TrackIdProvider.getInstance(this);
 		// trackIdProvider = new TrackIdProvider(this, true);
 		if (!trackIdProvider.isEmpty()) {// 恢复状态
-			openCurrent(trackIdProvider.getId());
+			open(trackIdProvider.getId());
 			restoreStatus();
 		}
 		mPlayer.setVolume(0f);
@@ -436,42 +435,24 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		return true;
 	}
 
-	public void open(String path) {
-		if (path == null) {
-			return;
-		}
-		boolean fromListProvider;
+	public void open(int trackid) {
 		ContentResolver resolver = getContentResolver();
-		Uri uri;
-		String where;
-		String selectionArgs[];
-		if (path.startsWith("content://media/")) {
-			uri = Uri.parse(path);
-			where = null;
-			selectionArgs = null;
-			fromListProvider = true;
-		} else {
-			uri = MediaStore.Audio.Media.getContentUriForPath(path);
-			where = MediaStore.Audio.Media.DATA + "=?";
-			selectionArgs = new String[] { path };
-			fromListProvider = false;
-		}
-		mFileToPlay = path;
+
 		if (mCursor != null)
 			mCursor.close();
-		mCursor = resolver.query(uri, mCursorCols, where, selectionArgs, null);
+		mCursor = resolver.query(
+				ContentUris.withAppendedId(AUDIO.URI, trackid), mCursorCols,
+				null, null, null);
 		if (mCursor != null) {
 			if (mCursor.moveToFirst()) {
-				nowId = mCursor.getInt(mCursor
-						.getColumnIndex(MediaStore.Audio.Media._ID));
-				if (!fromListProvider)
-					trackIdProvider.addToNext(nowId);// TODO 这一句逻辑对吗？？
+				mFileToPlay = mCursor.getString(mCursor
+						.getColumnIndex(MEDIA.AUDIO.FIELD_PATH));
 			} else {
-				// TODO 异常处理?
 				mCursor.close();
 				mCursor = null;
 			}
 		}
+		nowId = trackid;
 		mPlayer.setDataSource(mFileToPlay);
 		if (!mPlayer.isInitialized()) {
 			if (mOpenFailedCounter++ < 10 && trackIdProvider.hasNext()) {
@@ -487,24 +468,27 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		}
 	}
 
-	private void openCurrent(int id) {
-		open(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + id);
-	}
+	/*
+	 * private void openCurrent(int id) { open(id); }
+	 */
 
 	public void pause() {
 		mMediaplayerHandler.removeMessages(FADEUP);
 		if (isPlaying()) {
-			mPlayer.setVolume(0f);
-			mPlayer.pause();
-			gotoIdleState();
-			notifyChange(PLAYSTATE_CHANGED);
+			mMediaplayerHandler.sendEmptyMessage(FADEDOWN);
 		}
+	}
+
+	private void doPause() {
+		mPlayer.pause();
+		gotoIdleState();
+		notifyChange(PLAYSTATE_CHANGED);
 	}
 
 	public void play() {
 		if (mPlayer.isInitialized()) {
 			mPlayer.start();
-			mCurrentVolume = 0f;
+			// mCurrentVolume = 0f;
 			mMediaplayerHandler.removeMessages(FADEDOWN);
 			mMediaplayerHandler.sendEmptyMessage(FADEUP);
 			Notification();
@@ -550,7 +534,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 
 	private void reloadQueue() {
 		trackIdProvider.reload();
-		openCurrent(trackIdProvider.getId());
+		open(trackIdProvider.getId());
 		seek(mPreferences.getLong("seekpos", 0L));
 		notifyChange(META_CHANGED);
 	}
@@ -611,7 +595,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 
 	public void startplay() {
 		stop(false);
-		openCurrent(trackIdProvider.getId());
+		open(trackIdProvider.getId());
 		notifyChange(META_CHANGED);
 		play();
 	}
@@ -620,6 +604,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		if (mPlayer.isInitialized()) {
 			mPlayer.stop();
 		}
+		mCurrentVolume = 0.0f;
 		mFileToPlay = null;
 		if (mCursor != null) {
 			mCursor.close();

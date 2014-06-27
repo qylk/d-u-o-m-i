@@ -41,7 +41,7 @@ public class SlidingIndicator extends LinearLayout {
 		icons = new View[num];
 		while (i < num) {
 			icons[i] = new View(getContext());
-			icons[i].setBackground(indicator.getConstantState().newDrawable());
+			icons[i].setBackgroundDrawable(indicator.getConstantState().newDrawable());
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(w,
 					h);
 			params.setMargins(margin, 0, margin, 0);

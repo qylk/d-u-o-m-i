@@ -3,12 +3,8 @@ package com.qylk.app.musicplayer.utils;
 import android.net.Uri;
 
 public final class MEDIA {
+
 	public static final class AUDIO {
-		public static final class SYNC {
-			public static final String PATH_SYNC = "sync";
-			public static final Uri URI = Uri.parse("content://"
-					+ AUTOHORITY_NAME + '/' + PATH_AUDIO + '/' + PATH_SYNC);
-		}
 
 		public static final class TAG {
 			public static final String FIELD_ID = "_id";
@@ -64,9 +60,11 @@ public final class MEDIA {
 	public static final String AUTOHORITY_NAME = "com.qylk.app.provider.media";
 	public static final String CONTENT_AUDIO_ITEM_TYPE = "vnd.android.cursor.item/vnd.media.audio.id";
 	public static final String CONTENT_TAG_ITEM_TYPE = "vnd.android.cursor.item/vnd.media.tag.id";
-	public static final String CONTENT_AUDIO_SYNC_TYPE = "vnd.android.cursor.dir/vnd.media.audio.sync";
 	public static final String CONTENT_AUDIO_ARTIST_TYPE = "vnd.android.cursor.dir/vnd.media.audio.artist";
 	public static final String CONTENT_AUDIO_TYPE = "vnd.android.cursor.dir/vnd.media.audio";
-
-	public static final String INTENT_SYNC_DONE = "com.qylk.app.musicplayer.media.syncdone";
+	
+	
+	public static final String SCAN_ACTION = "com.qylk.app.provider.media.scan";
+	public static final String INTENT_SCAN_START = "com.qylk.app.musicplayer.media.syncstart";
+	public static final String INTENT_SCAN_DONE = "com.qylk.app.musicplayer.media.syncdone";
 }

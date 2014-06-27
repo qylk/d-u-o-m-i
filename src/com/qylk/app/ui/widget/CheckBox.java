@@ -15,8 +15,8 @@ public class CheckBox extends Button implements Checkable {
 	}
 
 	@Override
-	public void setBackground(Drawable background) {
-		super.setBackground(background);
+	public void setBackgroundDrawable(Drawable background) {
+		super.setBackgroundDrawable(background);
 		if (background != null)
 			background.setCallback(this);
 	}

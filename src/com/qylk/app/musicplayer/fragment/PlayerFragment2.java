@@ -36,7 +36,7 @@ public class PlayerFragment2 extends ActionBarFragment {
 	private ServiceProxy.ServiceToken mToken;
 	private boolean initialed;
 	private ViewStub queueWapper;
-
+	private boolean paused = true;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -153,7 +153,7 @@ public class PlayerFragment2 extends ActionBarFragment {
 					intent.getStringExtra("artist"));
 		}
 	};
-	private boolean paused = true;
+	
 
 	@Override
 	public void onBackPressed() {

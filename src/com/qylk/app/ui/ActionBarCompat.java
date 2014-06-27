@@ -165,4 +165,5 @@ public class ActionBarCompat extends RelativeLayout implements
 	public ActionBarMenuItem getMenu(int id) {
 		return menus.get(id);
 	}
+
 }
