@@ -103,7 +103,7 @@ public abstract class CommonTrackListFragment extends ActionBarFragment
 
 			break;
 		case TrackMenuItemView.QUEUE:
-			TrackIdProvider.getInstance(null).addToNext(id);
+			TrackIdProvider.getInstance().addToNext(id);
 			break;
 		case TrackMenuItemView.SHARE:
 

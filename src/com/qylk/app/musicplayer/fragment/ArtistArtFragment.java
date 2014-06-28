@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.media.audiofx.AudioEffect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,13 +29,13 @@ public class ArtistArtFragment extends Fragment implements OnClickListener {
 	private static final int ALBUM_ART_DECODED = 2;
 	private RoundWheelImageView artwork;
 	private WheelImageView image_rotate;
-	private ImageButton collection;
+	private ImageButton collection, eq;
 	protected int mArtId;
 	protected boolean hasArtwork = false;
 	private boolean preferAnimation = false;
 	private static final int ROTATE_TIME = 5000;
 	private static final long DELAY_UPDATE_VIEW = 400L;
-	private static final long DELAY_UPDATE_ANIMATION = 420L;
+	private static final long DELAY_UPDATE_ANIMATION = 0L;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,14 +50,23 @@ public class ArtistArtFragment extends Fragment implements OnClickListener {
 		image_rotate = (WheelImageView) view.findViewById(R.id.image_rotate);
 		image_rotate.setOnClickListener(this);
 		collection = (ImageButton) view.findViewById(R.id.collection);
+		eq = (ImageButton) view.findViewById(R.id.eq);
 		collection.setOnClickListener(this);
+		eq.setOnClickListener(this);
 		return view;
 	}
 
 	@Override
 	public void onClick(View v) {
-		preferAnimation = !preferAnimation;
-		updateAnimation(true, 100);
+		if (v.getId() == R.id.image_rotate) {
+			preferAnimation = !preferAnimation;
+			updateAnimation(true, 100);
+		} else if (v.getId() == R.id.eq) {
+			Intent i = new Intent(
+					AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
+			if (getActivity().getPackageManager().resolveActivity(i, 0) != null)
+				startActivity(i);
+		}
 	}
 
 	private void updateAnimation(boolean reset, long delay) {

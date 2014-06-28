@@ -22,6 +22,7 @@ import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.service.MediaPlaybackService;
 import com.qylk.app.musicplayer.service.TrackIdProvider;
 import com.qylk.app.musicplayer.service.TrackIdProvider.MODE;
+import com.qylk.app.musicplayer.utils.ConstantValueDef;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
 import com.qylk.app.musicplayer.utils.TimeUtils;
 import com.qylk.app.ui.VolumeAdjustView;
@@ -96,8 +97,11 @@ public class PlayerBar extends FrameLayout implements View.OnClickListener,
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.mode:
-			TrackIdProvider.getInstance(null).setNextMode();
-			updateModeDrawable(TrackIdProvider.getInstance(null).getMode());
+			MODE mode = TrackIdProvider.getInstance().setNextMode();
+			if (mode == MODE.SHUFFLE)
+				getContext().sendBroadcast(
+						new Intent(ConstantValueDef.QUEUE_CHANGED));
+			updateModeDrawable(mode);
 			break;
 		case R.id.pre:
 			ServiceProxy.pre();
@@ -245,7 +249,7 @@ public class PlayerBar extends FrameLayout implements View.OnClickListener,
 		time.setText("00:00");
 		this.duration.setText(TimeUtils.makeTimeString(duration));
 		setPauseButtonImage();
-		updateModeDrawable(TrackIdProvider.getInstance(null).getMode());
+		updateModeDrawable(TrackIdProvider.getInstance().getMode());
 	}
 
 	private void queueNextRefresh(long delay) {

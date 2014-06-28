@@ -51,11 +51,11 @@
             android:src="@drawable/popdown_collect" />
 
         <ImageButton
-            android:id="@+id/more"
+            android:id="@+id/eq"
             style="@style/PlayerOperationBarItem"
             android:layout_width="52.0dip"
             android:layout_alignParentRight="true"
-            android:src="@drawable/player_more" />
+            android:src="@drawable/popdown_eq" />
 
         <View
             android:layout_width="fill_parent"

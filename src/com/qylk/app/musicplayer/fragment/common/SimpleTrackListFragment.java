@@ -134,13 +134,13 @@ public class SimpleTrackListFragment extends CommonTrackListFragment implements
 
 	private void prepareForPosition(int position) {
 		TrackListAdapter adapter = (TrackListAdapter) getAdapter();
-		TrackIdProvider.getInstance(null).setToPosition(adapter.getCursor(),
+		TrackIdProvider.getInstance().setToPosition(adapter.getCursor(),
 				position);
 	}
 
 	private void prepareList(boolean shuffle) {
 		TrackListAdapter adapter = (TrackListAdapter) getAdapter();
-		TrackIdProvider.getInstance(null).changeList(adapter.getCursor(),
+		TrackIdProvider.getInstance().changeList(adapter.getCursor(),
 				shuffle);
 	}
 

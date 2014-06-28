@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.qylk.app.musicplayer.R;
 import com.qylk.app.musicplayer.activity.MainActivity;
 import com.qylk.app.musicplayer.utils.MEDIA;
+import com.qylk.app.musicplayer.utils.ObjectLoader;
 import com.qylk.app.musicplayer.utils.MEDIA.AUDIO;
 import com.qylk.app.musicplayer.utils.MediaDatabase;
 
@@ -48,15 +49,11 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 	static final int FADEUP = 5;
 
 	private static final int SEC = 1000;
-	private static final long IDLE_DELAY = 10 * SEC;// 30Ãë³¬Ê±Ïú»Ùservice
+	private static final long IDLE_DELAY = 10 * SEC;// 10Ãë³¬Ê±Ïú»Ùservice
 	private static final int PLAYBACKSERVICE_STATUS = 2014;
-
 	public static final String SERVICECMD = "com.qylk.music.service.action";
-
 	public static final String PLAYSTATE_CHANGED = "com.qylk.music.playstatechanged";
-
 	public static final String META_CHANGED = "com.qylk.music.metachanged3";
-
 	private AudioFocus mAudioFocus = AudioFocus.NoFocusNoDuck;
 	private AudioFocusHelper mAudioFocusHelper;
 	private AudioManager mAudioManager;
@@ -84,8 +81,6 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 			if (isPlaying() || mPausedByTransientLossOfFocus || mServiceInUse) {
 				return;
 			}
-			saveStatus();
-			trackIdProvider.close();
 			stopSelf(mServiceStartId);
 		}
 	};
@@ -96,11 +91,11 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case FADEDOWN:
-				mCurrentVolume -= .025f;
-				if (mCurrentVolume > .1f) {
+				mCurrentVolume -= .04f;
+				if (mCurrentVolume > .2f) {
 					mMediaplayerHandler.sendEmptyMessageDelayed(FADEDOWN, 10);
 				} else {
-					mCurrentVolume = .1f;
+					mCurrentVolume = .2f;
 					doPause();
 				}
 				mPlayer.setVolume(mCurrentVolume * mCurrentVolume);
@@ -309,7 +304,8 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		mPlayer = new MultiPlayer(this);
 		mPlayer.setHandler(mMediaplayerHandler);
-		trackIdProvider = TrackIdProvider.getInstance(this);
+		trackIdProvider = (TrackIdProvider) new ObjectLoader<TrackIdProvider>(
+				this).loadObj(TrackIdProvider.class, "foo.list");
 		// trackIdProvider = new TrackIdProvider(this, true);
 		if (!trackIdProvider.isEmpty()) {// »Ö¸´×´Ì¬
 			open(trackIdProvider.getId());
@@ -329,6 +325,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 	@Override
 	public void onDestroy() {
 		stopForeground(true);
+		saveStatus();
 		mPlayer.release();
 		mPlayer = null;
 		giveUpAudioFocus();
@@ -342,6 +339,9 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 			unregisterReceiver(mUnmountReceiver);
 			mUnmountReceiver = null;
 		}
+		new ObjectLoader<TrackIdProvider>(MediaPlaybackService.this).closeObj(
+				"foo.list", trackIdProvider);
+		Log.v(getClass().getSimpleName(), "Service onDestory");
 		// mWakeLock.release();
 		super.onDestroy();
 	}
@@ -443,14 +443,16 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		mCursor = resolver.query(
 				ContentUris.withAppendedId(AUDIO.URI, trackid), mCursorCols,
 				null, null, null);
-		if (mCursor != null) {
-			if (mCursor.moveToFirst()) {
-				mFileToPlay = mCursor.getString(mCursor
-						.getColumnIndex(MEDIA.AUDIO.FIELD_PATH));
-			} else {
-				mCursor.close();
-				mCursor = null;
-			}
+		if (mCursor == null) {
+			return;
+		}
+		if (mCursor.moveToFirst()) {
+			mFileToPlay = mCursor.getString(mCursor
+					.getColumnIndex(MEDIA.AUDIO.FIELD_PATH));
+		} else {
+			mCursor.close();
+			mCursor = null;
+			return;
 		}
 		nowId = trackid;
 		mPlayer.setDataSource(mFileToPlay);
@@ -516,10 +518,12 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 				public void onReceive(Context context, Intent intent) {
 					String action = intent.getAction();
 					if (action.equals(Intent.ACTION_MEDIA_EJECT)) {
-						trackIdProvider.close();
+						new ObjectLoader<TrackIdProvider>(
+								MediaPlaybackService.this).closeObj("foo.list",
+								trackIdProvider);
 						closeExternalStorageFiles(intent.getData().getPath());
 					} else if (action.equals(Intent.ACTION_MEDIA_MOUNTED)) {
-						reloadQueue();
+						reload();
 						notifyChange(META_CHANGED);
 					}
 				}
@@ -532,8 +536,7 @@ public class MediaPlaybackService extends Service implements MusicFocusable {
 		}
 	}
 
-	private void reloadQueue() {
-		trackIdProvider.reload();
+	private void reload() {
 		open(trackIdProvider.getId());
 		seek(mPreferences.getLong("seekpos", 0L));
 		notifyChange(META_CHANGED);

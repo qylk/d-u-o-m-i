@@ -1,6 +1,5 @@
 package com.qylk.app.musicplayer.fragment;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qylk.app.musicplayer.R;
+import com.qylk.app.musicplayer.activity.BaseActivity;
 import com.qylk.app.musicplayer.activity.MainActivity;
 import com.qylk.app.musicplayer.adapter.ListGenerAdapter;
-import com.qylk.app.musicplayer.fragment.common.SimpleTrackListFragment;
 import com.qylk.app.musicplayer.utils.MEDIA;
 import com.qylk.app.ui.ActionBar;
 import com.qylk.app.ui.ActionBarFragment;
@@ -72,7 +71,6 @@ public class MainFragment extends ActionBarFragment implements
 		((TextView) headerview.findViewById(R.id.title)).setText(header);
 		return headerview;
 	}
-	
 
 	@Override
 	protected void onCreateActionBar(ActionBar act) {
@@ -85,7 +83,10 @@ public class MainFragment extends ActionBarFragment implements
 
 	@Override
 	public void onBackPressed() {
-		((MainActivity) getActivity()).toggle();
+		if (!((BaseActivity) getActivity()).getSlidingMenu().isMenuShowing())
+			((MainActivity) getActivity()).toggle();
+		else
+			getActivity().finish();
 	}
 
 	private OnClickListener homeClickListener = new OnClickListener() {

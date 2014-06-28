@@ -41,7 +41,7 @@ public class QueueFragment extends SimpleSortableTrackListFragment {
 
 			@Override
 			public void onClick(View v) {
-				TrackIdProvider.getInstance(null).clear();
+				TrackIdProvider.getInstance().clear();
 				TrackListAdapter adapter = (TrackListAdapter) getAdapter();
 				adapter.changeCursor(null);
 				getListView().invalidate();

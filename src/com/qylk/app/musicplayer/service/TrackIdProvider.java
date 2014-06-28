@@ -1,16 +1,14 @@
 package com.qylk.app.musicplayer.service;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 
+import com.qylk.app.musicplayer.utils.Loadable;
 import com.qylk.app.musicplayer.utils.MusicUtils;
 import com.qylk.app.musicplayer.utils.MyInteger;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
-import com.qylk.app.musicplayer.utils.TextUtils;
 
 /**
  * @author qylk2014 <br>
@@ -18,17 +16,14 @@ import com.qylk.app.musicplayer.utils.TextUtils;
  *         2014-06-04 <br>
  *         {@link http://www.qylk.blog.163.com}
  */
-public class TrackIdProvider {
+public class TrackIdProvider implements Serializable, Loadable {
+	private static final long serialVersionUID = -6893791495299884568L;
 	private static final int LIST_DEFAULT_SIZE = 10;
-	public static final String QUEUE_CHANGED = "com.qylk.music.queuechanged";
-
 	private int idIndex = -1;
 	private int listLen = 0;
 	private MODE mMode = MODE.NORMAL;
 	private int[] mPlayList = new int[LIST_DEFAULT_SIZE];
-	private SharedPreferences mPreferences;
-	private Context mContext;
-	private static TrackIdProvider instance;
+	private static TrackIdProvider instance = null;
 
 	public enum MODE {
 		NORMAL(0), REPEAT(1), LOCKONE(2), SHUFFLE(3);
@@ -52,18 +47,26 @@ public class TrackIdProvider {
 		}
 	};
 
-	public TrackIdProvider(Context context) {
-		mPreferences = context.getSharedPreferences("Music",
-				Context.MODE_PRIVATE);
-		mContext = context;
-		reload();
+	public TrackIdProvider() {
+		if (instance == null) {
+			instance = this;
+		}
 	}
 
-	public static TrackIdProvider getInstance(Context context) {
-		if (instance == null)
-			instance = new TrackIdProvider(context);
+	public static TrackIdProvider getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("use objLoader load this first");
+		}
 		return instance;
 	}
+
+	/*
+	 * private void saveThis(Context context) { try { FileOutputStream fs =
+	 * context.openFileOutput("foo.list", Context.MODE_PRIVATE);
+	 * ObjectOutputStream os = new ObjectOutputStream(fs);
+	 * os.writeObject(instance); os.close(); } catch (IOException ex) {
+	 * ex.printStackTrace(); } }
+	 */
 
 	public void changeList(Cursor cursor, boolean shuffle) {
 		int[] ids = com.qylk.app.musicplayer.utils.TextUtils
@@ -80,9 +83,6 @@ public class TrackIdProvider {
 	public void setToPosition(Cursor cursor, int position) {
 		changeList(cursor, false);
 		setPosition(position);
-		// idIndex = -1;// 当前播放位置置为-1，为不妨碍moveItems
-		// moveItems(position, 0);// 当position位置的歌曲id移到队列首
-		// idIndex = 0;
 	}
 
 	/**
@@ -111,14 +111,6 @@ public class TrackIdProvider {
 			mPlayList[p] = id;
 		}
 		moveItems(p, (p <= idIndex) ? idIndex : idIndex + 1);
-	}
-
-	public void close() {
-		SharedPreferences.Editor ed = mPreferences.edit();
-		ed.putString("queue", TextUtils.Array2HexString(mPlayList, listLen));
-		ed.putInt("curpos", idIndex);
-		ed.putInt("mode", mMode.getId());
-		ed.commit();
 	}
 
 	private void ensureListCapacity(int size) {
@@ -243,23 +235,12 @@ public class TrackIdProvider {
 		return getId();
 	}
 
-	private void parseQueueString(String str) {
-		mPlayList = TextUtils.HexString2Array(str);
-		listLen = mPlayList.length;
-	}
-
 	public int previous() {
 		if (idIndex <= 0)
 			idIndex = listLen - 1;
 		else
 			idIndex -= 1;
 		return getId();
-	}
-
-	public void reload() {
-		idIndex = mPreferences.getInt("curpos", -1);
-		parseQueueString(mPreferences.getString("queue", ""));
-		mMode = MODE.getMode(mPreferences.getInt("mode", MODE.NORMAL.getId()));
 	}
 
 	public boolean remove(int first, int last) {
@@ -306,23 +287,18 @@ public class TrackIdProvider {
 				MusicUtils.shuffleArray(mPlayList, 0, listLen);
 				idIndex = searchId(id);
 				moveItems(idIndex, 0);
-				notifyChanged();
 			}
 		} else if (mMode == MODE.SHUFFLE) {
 			int id = getId();
 			Arrays.sort(mPlayList, 0, listLen);
 			idIndex = searchId(id);
-			notifyChanged();
 		}
 		mMode = mode;
 	}
 
-	private void notifyChanged() {
-		mContext.sendBroadcast(new Intent(QUEUE_CHANGED));
-	}
-
-	public void setNextMode() {
+	public MODE setNextMode() {
 		setMode(MODE.getMode(mMode.getId() + 1));
+		return mMode;
 	}
 
 	public void setPosition(int idx) {
@@ -335,4 +311,10 @@ public class TrackIdProvider {
 		idIndex = -1;
 		listLen = 0;
 	}
+
+	@Override
+	public void afterLoad() {
+		instance = this;
+	}
+
 }

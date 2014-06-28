@@ -44,7 +44,6 @@ public class PopWindowMenu extends PopWindow implements View.OnClickListener {
 	 *            Menu in the List will not show on position lower than this
 	 *            value
 	 */
-	@SuppressWarnings("deprecation")
 	public final void setMenus(SparseArray<ActionBarMenuItem> menus, int offset) {
 		view_height += 2 * mContext.getResources().getDimensionPixelSize(
 				R.dimen.popmenu_top_marign);

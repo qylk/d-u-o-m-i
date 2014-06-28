@@ -30,7 +30,6 @@ public class TrackListAdapter extends SimpleCursorAdapter implements
 		CharArrayBuffer buffer2;
 	}
 
-	@SuppressWarnings("deprecation")
 	public TrackListAdapter(Context context, int layout, Cursor c,
 			String[] from, int[] to) {
 		super(context, layout, c, from, to);

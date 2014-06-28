@@ -56,14 +56,14 @@ public class MainActivity extends BaseActivity implements
 			Toast.makeText(MainActivity.this, "…®√ËÕÍ±œ", Toast.LENGTH_LONG).show();
 		}
 	};
-	
+
 	protected void onResume() {
 		super.onResume();
 		IntentFilter f = new IntentFilter();
 		f.addAction(MEDIA.INTENT_SCAN_DONE);
 		registerReceiver(updateListListener, f);
 	};
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -79,7 +79,14 @@ public class MainActivity extends BaseActivity implements
 	@Override
 	public void onBackPressed() {
 		Fragment frg = ActionBarFragment.getFoucusFragment();
-		((FragmentBase) frg).onBackPressed();
+		if (frg instanceof PlayerFragment2) {
+			if (getSlidingMenu().isMenuShowing())
+				toggle();
+			else
+				((FragmentBase) frg).onBackPressed();
+		} else {
+			((FragmentBase) frg).onBackPressed();
+		}
 	}
 
 	// dispatch KeyEvent to fragments

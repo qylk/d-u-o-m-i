@@ -99,7 +99,6 @@ public class ServiceProxy {
 			ServiceProxyRegisterListener listener) {
 		if (token != null)
 			sConnectionMap.remove(token.mWrappedContext);
-		System.out.println("ssss:" + sConnectionMap.size());
 		if (sConnectionMap.isEmpty()) {
 			Context app = token.mWrappedContext;
 			app.getApplicationContext().unbindService(localsc);

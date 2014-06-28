@@ -17,6 +17,7 @@ import com.qylk.app.musicplayer.adapter.TrackListAdapter;
 import com.qylk.app.musicplayer.service.MediaPlaybackService;
 import com.qylk.app.musicplayer.service.NowPlayingCursor;
 import com.qylk.app.musicplayer.service.TrackIdProvider;
+import com.qylk.app.musicplayer.utils.ConstantValueDef;
 import com.qylk.app.musicplayer.utils.ServiceProxy;
 
 public class QueueView extends RelativeLayout implements OnItemClickListener {
@@ -36,7 +37,7 @@ public class QueueView extends RelativeLayout implements OnItemClickListener {
 
 			@Override
 			public void onClick(View v) {
-				TrackIdProvider.getInstance(null).clear();
+				TrackIdProvider.getInstance().clear();
 				mAdapter.changeCursor(null);
 				listview.invalidate();
 				ServiceProxy.stop();
@@ -70,7 +71,7 @@ public class QueueView extends RelativeLayout implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		NowPlayingCursor cursor = (NowPlayingCursor) mAdapter.getCursor();
-		TrackIdProvider.getInstance(null).setPosition(
+		TrackIdProvider.getInstance().setPosition(
 				cursor.getOffset() + position);
 		ServiceProxy.play();
 	}
@@ -81,7 +82,7 @@ public class QueueView extends RelativeLayout implements OnItemClickListener {
 		if (visibility == View.VISIBLE) {
 			reg();
 			setCusor();
-			listview.setSelectionFromTop(TrackIdProvider.getInstance(null)
+			listview.setSelectionFromTop(TrackIdProvider.getInstance()
 					.getCurPosition() - mAdapter.getOffset(), 200);
 		} else {
 			mAdapter.changeCursor(null);
@@ -102,7 +103,7 @@ public class QueueView extends RelativeLayout implements OnItemClickListener {
 	private void reg() {
 		IntentFilter f = new IntentFilter();
 		f.addAction(MediaPlaybackService.META_CHANGED);
-		f.addAction(TrackIdProvider.QUEUE_CHANGED);
+		f.addAction(ConstantValueDef.QUEUE_CHANGED);
 		getContext().registerReceiver(mQueueListener, f);
 		mQueueListener.onReceive(getContext(), new Intent(
 				MediaPlaybackService.META_CHANGED).putExtra("id",
@@ -122,7 +123,7 @@ public class QueueView extends RelativeLayout implements OnItemClickListener {
 				setCusor();
 				mAdapter.notifyDataSetInvalidated();
 				mAdapter.notifyDataSetChanged();
-				listview.setSelectionFromTop(TrackIdProvider.getInstance(null)
+				listview.setSelectionFromTop(TrackIdProvider.getInstance()
 						.getCurPosition() - mAdapter.getOffset(), 200);
 			}
 		}

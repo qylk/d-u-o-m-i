@@ -31,41 +31,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <activity -->
-        <!-- android:name="com.qylk.app.musicplayer.activity.PlayActivity" -->
-        <!-- android:clearTaskOnLaunch="true" -->
-        <!-- android:excludeFromRecents="true" -->
-        <!-- android:exported="true" -->
-        <!-- android:label="@string/mediaplaybacklabel" -->
-        <!-- android:launchMode="singleTask" -->
-        <!-- android:taskAffinity="" -->
-        <!-- android:theme="@*android:style/Theme.Black.NoTitleBar.Fullscreen" > -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.VIEW" /> -->
-
-
-        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-
-
-        <!-- <data android:scheme="content" /> -->
-        <!-- <data android:host="media" /> -->
-        <!-- <data android:mimeType="audio/*" /> -->
-        <!-- <data android:mimeType="application/ogg" /> -->
-        <!-- <data android:mimeType="application/x-ogg" /> -->
-        <!-- <data android:mimeType="application/itunes" /> -->
-        <!-- </intent-filter> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="com.qylk.music.PLAYBACK_VIEWER" /> -->
-
-
-        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
+       
         <activity
             android:name="com.qylk.app.musicplayer.activity.MainActivity"
             android:clearTaskOnLaunch="true"
             android:excludeFromRecents="true"
-            android:label="@string/mediaplaybacklabel"
+            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:taskAffinity=""
             android:windowSoftInputMode="adjustNothing"
@@ -81,22 +52,22 @@
                 <data android:mimeType="vnd.android.cursor.dir/player" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.qylk.app.musicplayer.activity.PlayerActivity"
-            android:excludeFromRecents="true"
-            android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
-            <intent-filter>
-                <action android:name="android.intent.action.PICK" />
+<!--         <activity -->
+<!--             android:name="com.qylk.app.musicplayer.activity.PlayerActivity" -->
+<!--             android:excludeFromRecents="true" -->
+<!--             android:launchMode="singleTask" -->
+<!--             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" > -->
+<!--             <intent-filter> -->
+<!--                 <action android:name="android.intent.action.PICK" /> -->
 
-                <category android:name="android.intent.category.DEFAULT" />
+<!--                 <category android:name="android.intent.category.DEFAULT" /> -->
 
-                <data android:mimeType="vnd.android.cursor.dir/library" />
-                <data android:mimeType="vnd.android.cursor.dir/filter" />
-                <data android:mimeType="vnd.android.cursor.dir/playlist" />
-                <data android:mimeType="vnd.android.cursor.dir/player" />
-            </intent-filter>
-        </activity>
+<!--                 <data android:mimeType="vnd.android.cursor.dir/library" /> -->
+<!--                 <data android:mimeType="vnd.android.cursor.dir/filter" /> -->
+<!--                 <data android:mimeType="vnd.android.cursor.dir/playlist" /> -->
+<!--                 <data android:mimeType="vnd.android.cursor.dir/player" /> -->
+<!--             </intent-filter> -->
+<!--         </activity> -->
 
         <service
             android:name="com.qylk.app.musicplayer.service.MediaPlaybackService"

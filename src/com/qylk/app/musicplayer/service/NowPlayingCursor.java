@@ -94,7 +94,7 @@ public class NowPlayingCursor extends AbstractCursor {
 	}
 
 	private void makeNowPlayingCursor() {
-		mNowPlaying = TrackIdProvider.getInstance(null).getCopyList(offset,
+		mNowPlaying = TrackIdProvider.getInstance().getCopyList(offset,
 				MAX_LOAD);
 		mSize = mNowPlaying.length;
 		if (mSize == 0) {
@@ -127,7 +127,7 @@ public class NowPlayingCursor extends AbstractCursor {
 		doMoveLocal(from, to);
 		from += offset.intValue();
 		to += offset.intValue();
-		TrackIdProvider idp = TrackIdProvider.getInstance(null);
+		TrackIdProvider idp = TrackIdProvider.getInstance();
 		idp.moveItems(from, to);
 		onMove(-1, mCurrentPlaylistCursor.getPosition()); // update the
 															// underlying cursor
@@ -160,7 +160,6 @@ public class NowPlayingCursor extends AbstractCursor {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void deactivate() {
 		if (mCurrentPlaylistCursor != null)
@@ -170,7 +169,7 @@ public class NowPlayingCursor extends AbstractCursor {
 	public boolean removeItem(int which) {
 		doRemoveLocal(which);
 		which += offset.intValue();
-		TrackIdProvider idp = TrackIdProvider.getInstance(null);
+		TrackIdProvider idp = TrackIdProvider.getInstance();
 		if (!idp.remove(which, which)) {
 			return false; // delete failed
 		}
